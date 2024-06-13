@@ -1,0 +1,12 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #252850 !important;
+    color: white !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-weight: bolder !important;
+}
+
+h1 {
+    text-decoration: underline;
+}
