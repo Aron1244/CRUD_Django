@@ -18,7 +18,7 @@
         <pre>Apellido M.: <input type="text" name="materno" value="{{alumno.apellido_materno}}"></pre>
         <pre>Fecha Nac.: <input type="date" name="fechaNac" value="{{alumno.fecha_nacimiento|date:'y-m-d'}}"></pre>
         <pre>Género: <select name="genero">
-            {% for genero in generos %}
+            {% for genero in genero %}
                 {% if genero.genero == alumno.id_genero.genero %}
                     <option value="{{genero.id_genero}}" selected> {{genero.genero}} </option>
                 {% else %}
