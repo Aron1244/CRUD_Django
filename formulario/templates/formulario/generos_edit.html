@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor géneros</title>
+</head>
+<body>
+    
+    <div style="text-align: center;">
+        {% if genero %}
+            <h2>Formulario actualizar género</h2>
+            <br>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form.as_table}}
+
+                <input type="submit" name="opcion" value="Actualizar">
+            </form><br><br>
+        {% endif %}
+
+        <div id="idMensaje">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+        </div>
+        <br><br>
+        <a href="{% url 'crud_generos' %}">Volver</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añadir genero</title>
+</head>
+<body>
+    <h1>Formulario Genero</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_table}}
+        <input type="submit" value="Agregar">
+    </form>
+    <br>
+    <div id="idMensajes">
+        {% if mensaje %}
+            {{mensaje}}
+        {% endif %}
+    </div>
+
+    <br>
+    <a href="{% url 'crud_generos' %}">Volver</a>
+    <br>
+</body>
+</html>
