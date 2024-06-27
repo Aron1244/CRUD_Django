@@ -143,6 +143,7 @@ def generosAdd(request):
     if request.method == "POST":
         print("Controlador es un post...")
         form = GeneroForm(request.POST)
+
         if form.is_valid:
             print("Estoy en agregar, is_valid")
             form.save()
@@ -153,28 +154,49 @@ def generosAdd(request):
             context = {'mensaje':"Ok, datos grabados...", "form":form}
             return render(request, "formulario/generos_add.html",context)
         else:
-            form = GeneroForm()
             context = {'form':form}
-            return render(request, 'formulario/generos_add.html',context)
+    else:
+        form = GeneroForm()
+        context = {'form':form}
+        return render(request, 'formulario/generos_add.html',context)
 
-def generos_del(request):
+# def generos_del(request,pk):
+#     mensajes = []
+#     errores = []
+#     generos = Genero.objects.all()
+#     try:
+#         genero = Genero.objects.get(id_genero=pk)
+#         context = {}
+#         if genero:
+#             genero.delete()
+#             mensajes.append("Bien, datos eliminados...")
+#             context = {'generos':genero, 'mensajes':mensajes, 'errores':errores}
+#             return render(request, 'formulario/generos_list.html',context)
+#     except :
+#         print("Error, id no existe...")
+#         generos = Genero.objects.all()
+#         mensaje = "Error, id no existe"
+#         context = {'mensaje':mensaje, 'generos':generos}
+#         return render(request, 'formulario/generos_list.html', context)
+
+def generos_del(request, pk):
     mensajes = []
     errores = []
-    generos = Genero.objects.all()
+    context = {}
+
     try:
         genero = Genero.objects.get(id_genero=pk)
-        context = {}
-        if genero:
-            genero.delete()
-            mensajes.append("Bien, datos eliminados...")
-            context = {'generos':genero, 'mensajes':mensajes, 'errores':errores}
-            return render(request, 'formulario/generos_list.html',context)
-    except:
-        print("Error, id no existe...")
-        generos = Genero.objects.all()
-        mensaje = "Error, id no existe"
-        context = {'mensaje':mensaje, 'generos':generos}
-        return render(request, 'formulario/generos_list.html', context)
+        genero.delete()
+        mensajes.append("Bien, datos eliminados...")
+    except Genero.DoesNotExist:
+        errores.append("Error, id no existe")
+    except Exception as e:
+        errores.append(f"Error inesperado: {str(e)}")
+    
+    generos = Genero.objects.all()
+    context = {'generos': generos, 'mensajes': mensajes, 'errores': errores}
+    return render(request, 'formulario/generos_list.html', context)
+
 
 def generos_edit(request,pk):
     try:
